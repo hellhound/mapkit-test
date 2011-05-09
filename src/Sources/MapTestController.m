@@ -143,8 +143,8 @@
  clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
-        [self toggleUserAnnotation:self];
         needAddingAnnotation = YES;
+        [self toggleUserAnnotation:self];
     }
 }
 
@@ -157,11 +157,6 @@
     if ([userLocation isUpdating]) {
         [currentLocation autorelease];
         currentLocation = [[userLocation location] retain];
-        if (needAddingAnnotation) {
-            needAddingAnnotation = NO;
-            [self addAnnotation];
-        }
-
     }
 }
 
@@ -174,6 +169,10 @@
             centerCoordinate, 250, 250);
     [mapView setCenterCoordinate:centerCoordinate];
     [mapView setRegion:region animated:YES];
+    if (needAddingAnnotation) {
+        needAddingAnnotation = NO;
+        [self addAnnotation];
+    }
 }
 
 #pragma mark -
