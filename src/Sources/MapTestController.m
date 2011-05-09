@@ -2,6 +2,7 @@
 #import <UIKit/UIkit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import "MapAnnotation.h"
 #import "MapTestController.h"
 
 @implementation MapTestController
@@ -13,9 +14,12 @@
 {
     [locationManager setDelegate:nil];
     [locationManager release];
-    [currentHeading release];
+    locationManager = nil;
+    [currentLocation release];
+    currentLocation = nil;
     [testMapView setDelegate:nil];
     [testMapView release];
+    testMapView = nil;
     [super dealloc];
 }
 
@@ -49,11 +53,26 @@
             UITabBarSystemItemSearch tag:0] autorelease]];
 
     // Setting toolbar items
-    UIBarButtonItem *barItem = [[[UIBarButtonItem alloc]
+    UIBarButtonItem *spacerItem = [[[UIBarButtonItem alloc]
+            initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+            target:nil action:nil] autorelease];
+    UIBarButtonItem *annotationButtonItem = [[[UIBarButtonItem alloc]
             initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-            target:self action:@selector(toggleUserAnnotation)] autorelease];
+            target:self action:@selector(toggleUserAnnotation:)] autorelease];
+    UIBarButtonItem *composeButtonItem = [[[UIBarButtonItem alloc]
+            initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+            target:self
+            action:@selector(validateBeforeAddingAnnotation:)] autorelease];
 
-    [self setToolbarItems:[NSArray arrayWithObjects:barItem, nil]];
+    [self setToolbarItems:[NSArray arrayWithObjects:
+            annotationButtonItem, spacerItem, composeButtonItem, nil]];
+}
+
+- (void)initMainView
+{
+    UIView *view = [self view];
+    [view setAutoresizingMask:UIViewAutoresizingFlexibleWidth |
+            UIViewAutoresizingFlexibleHeight];
 }
 
 - (void)initMapView
@@ -80,10 +99,53 @@
     [superView addSubview:testMapView];
 }
 
-- (void)toggleUserAnnotation
+- (void)toggleUserAnnotation:(id)sender
 {
     // Start standard location services and show the user's current location
     [testMapView setShowsUserLocation:![testMapView showsUserLocation]];
+}
+
+- (void)validateBeforeAddingAnnotation:(id)sender
+{
+    if (currentLocation != nil) {
+        [self addAnnotation];
+    } else {
+        UIAlertView *alertView = [[[UIAlertView alloc]
+                initWithTitle:@"Need user location"
+                message:@"Do you wan't to update your current location?"
+                delegate:self
+                cancelButtonTitle:@"Cancel"
+                otherButtonTitles:@"OK", nil] autorelease];
+
+        [alertView show];
+    }
+}
+
+- (void)addAnnotation
+{
+    AnnotationAddController *addController =
+            [[[AnnotationAddController alloc]
+                initWithNibName:nil bundle:nil] autorelease];
+
+    [addController setDelegate:self];
+
+    UINavigationController *navigationController =
+            [[[UINavigationController alloc]
+                initWithRootViewController:addController] autorelease];
+
+    [self presentModalViewController:navigationController animated:YES];
+}
+
+#pragma mark -
+#pragma mark <UIAlertViewDelegate>
+
+- (void)    alertView:(UIAlertView *)alertView
+ clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self toggleUserAnnotation:self];
+        needAddingAnnotation = YES;
+    }
 }
 
 #pragma mark -
@@ -92,6 +154,15 @@
 - (void)        mapView:(MKMapView *)mapView
   didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+    if ([userLocation isUpdating]) {
+        [currentLocation autorelease];
+        currentLocation = [[userLocation location] retain];
+        if (needAddingAnnotation) {
+            needAddingAnnotation = NO;
+            [self addAnnotation];
+        }
+
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
@@ -103,5 +174,19 @@
             centerCoordinate, 250, 250);
     [mapView setCenterCoordinate:centerCoordinate];
     [mapView setRegion:region animated:YES];
+}
+
+#pragma mark -
+#pragma mark <AnnotationAddDelegate>
+
+- (void)annotationAddController:
+        (AnnotationAddController *)annotationAddController
+        didAddAnnotationTitle:(NSString *)title
+{
+    [self dismissModalViewControllerAnimated:YES];
+    if (title != nil && currentLocation != nil)
+        [testMapView addAnnotation:[[[MapAnnotation alloc]
+                initWithCoordinate:[currentLocation coordinate]
+                title:title] autorelease]];
 }
 @end

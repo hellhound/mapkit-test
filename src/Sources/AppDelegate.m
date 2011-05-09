@@ -18,8 +18,11 @@
 - (void)dealloc
 {
     [window release];
+    window = nil;
     [tabBarController release];
+    tabBarController = nil;
     [tabs release];
+    tabs = nil;
     [super dealloc];
 }
 

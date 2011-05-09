@@ -14,6 +14,7 @@
 		2C1282D61370A9D80092C7B8 /* trollface.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1282D41370A9D80092C7B8 /* trollface.png */; };
 		2C3328361370ABAD0005223E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3328351370ABAD0005223E /* CoreLocation.framework */; };
 		2C44C919137324D7005FEFA2 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C44C918137324D7005FEFA2 /* MapAnnotation.m */; };
+		2C71AEFA1378711E00BF58F5 /* AnnotationAddController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C71AEF91378711E00BF58F5 /* AnnotationAddController.m */; };
 		2C9339DB1370AAF20073ED0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9339D91370AAF20073ED0C /* AppDelegate.m */; };
 		2C9339DC1370AAF20073ED0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9339DA1370AAF20073ED0C /* main.m */; };
 		2CDA33B913711CAE00C8E5EA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDA33B813711CAE00C8E5EA /* MapKit.framework */; };
@@ -29,6 +30,7 @@
 		2C1282D41370A9D80092C7B8 /* trollface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trollface.png; sourceTree = "<group>"; };
 		2C3328351370ABAD0005223E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2C44C918137324D7005FEFA2 /* MapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapAnnotation.m; sourceTree = "<group>"; };
+		2C71AEF91378711E00BF58F5 /* AnnotationAddController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotationAddController.m; sourceTree = "<group>"; };
 		2C9339D91370AAF20073ED0C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2C9339DA1370AAF20073ED0C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2CDA33B813711CAE00C8E5EA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -94,6 +96,7 @@
 		2C9339D81370AAF20073ED0C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				2C71AEF91378711E00BF58F5 /* AnnotationAddController.m */,
 				2C44C918137324D7005FEFA2 /* MapAnnotation.m */,
 				2CFB85411370BC8500F35876 /* MapTestController.m */,
 				2C9339D91370AAF20073ED0C /* AppDelegate.m */,
@@ -167,6 +170,7 @@
 				2C9339DC1370AAF20073ED0C /* main.m in Sources */,
 				2CFB85421370BC8500F35876 /* MapTestController.m in Sources */,
 				2C44C919137324D7005FEFA2 /* MapAnnotation.m in Sources */,
+				2C71AEFA1378711E00BF58F5 /* AnnotationAddController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

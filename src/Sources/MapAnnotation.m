@@ -10,7 +10,9 @@
 - (void)dealloc
 {
     [title release];
+    title = nil;
     [coordinate release];
+    coordinate = nil;
     [super dealloc];
 }
 
@@ -35,5 +37,10 @@
 {
     return coordinate != nil ? *(CLLocationCoordinate2D *)[coordinate bytes] :
             (CLLocationCoordinate2D){0};
+}
+
+- (NSString *)title
+{
+    return title;
 }
 @end
