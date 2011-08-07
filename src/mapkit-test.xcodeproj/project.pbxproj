@@ -10,7 +10,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		2C1282D51370A9D80092C7B8 /* mapkit_test-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C1282D31370A9D80092C7B8 /* mapkit_test-Info.plist */; };
 		2C1282D61370A9D80092C7B8 /* trollface.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1282D41370A9D80092C7B8 /* trollface.png */; };
 		2C3328361370ABAD0005223E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C3328351370ABAD0005223E /* CoreLocation.framework */; };
 		2C44C919137324D7005FEFA2 /* MapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C44C918137324D7005FEFA2 /* MapAnnotation.m */; };
@@ -154,7 +153,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C1282D51370A9D80092C7B8 /* mapkit_test-Info.plist in Resources */,
 				2C1282D61370A9D80092C7B8 /* trollface.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
